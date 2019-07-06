@@ -28,7 +28,6 @@ public class CrawlerTest {
     private static WebDriver wd;
     private static WebDriverWait wait;
     private static final Logger logger = LoggerFactory.getLogger(CrawlerTest.class);
-    private List<BookObject> all_books = new ArrayList<BookObject>();
 
     @BeforeClass
     public static void seUp() {
@@ -44,14 +43,14 @@ public class CrawlerTest {
 
     @Test
     public void clawler() throws IOException, InterruptedException {
+        List<BookObject> all_books = new ArrayList<BookObject>();
+
         wd.get("https://www.mann-ivanov-ferber.ru/books/allbooks/?booktype=audiobook");
 
-        int bookCount = new MainPage(wd, wait).bookCount();
-
-        List<WebElement> books = wd.findElements(By.cssSelector("div.lego-book"));
+        List<WebElement> books =  new MainPage(wd, wait).bookCount();
         String mainWindow = wd.getWindowHandle();
 
-        for (int i = 0; i < bookCount; i++) {
+        for (int i = 0; i < books.size(); i++) {
             books.get(i).click();
             Set<String> tabs = wd.getWindowHandles();
             for (String tab : tabs) {
@@ -67,11 +66,11 @@ public class CrawlerTest {
             logger.info(tabs.toString());
         }
         logger.info(all_books.toString());
-        saveToFile();
+        saveToFile(all_books);
     }
 
 
-    private void saveToFile() throws IOException {
+    private void saveToFile(List<BookObject> all_books) throws IOException {
         FileWriter writer = new FileWriter("books.txt");
         for (BookObject book : all_books) {
             writer.write(book.toString() + "\n");
