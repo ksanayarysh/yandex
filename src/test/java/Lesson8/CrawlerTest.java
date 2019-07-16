@@ -42,7 +42,11 @@ public class CrawlerTest {
     }
 
     @Test
+<<<<<<< HEAD
     public void clawler() throws IOException {
+=======
+    public void clawler() throws IOException, InterruptedException {
+>>>>>>> 41d33c8523f039c46dcfca95ab8a8b3f0c656b55
         List<BookObject> all_books = new ArrayList<BookObject>();
 
         wd.get("https://www.mann-ivanov-ferber.ru/books/allbooks/?booktype=audiobook");

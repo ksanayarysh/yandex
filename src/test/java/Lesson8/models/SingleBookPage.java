@@ -19,7 +19,6 @@ public class SingleBookPage extends BasePage {
         book.setLink(wd.getCurrentUrl());
         book.setName(wd.findElement(book_name).getText());
 
-
         String authorsStr;
         List<WebElement> authors = wd.findElements(book_author);
         authorsStr = authors.get(0).getText();
